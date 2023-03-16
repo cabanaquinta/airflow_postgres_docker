@@ -53,3 +53,9 @@ from sqlalchemy import create_engine
 engine = create_engine('postgresql://root:root@pgdatabase:5432/ny_taxi')
 engine.connect()
 ```
+
+## To stop and delete containers, delete volumes with database data, and download images
+
+```bash
+docker-compose down --volumes --remove-orphans
+```
