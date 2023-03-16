@@ -1,0 +1,35 @@
+[2023-03-16 17:54:46,995] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: local_ingestion_v1.0.ingest_data manual__2023-03-16T17:54:33.369195+00:00 [queued]>
+[2023-03-16 17:54:47,044] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: local_ingestion_v1.0.ingest_data manual__2023-03-16T17:54:33.369195+00:00 [queued]>
+[2023-03-16 17:54:47,046] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-16 17:54:47,049] {taskinstance.py:1239} INFO - Starting attempt 1 of 2
+[2023-03-16 17:54:47,050] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-16 17:54:47,105] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): ingest_data> on 2023-03-16 17:54:33.369195+00:00
+[2023-03-16 17:54:47,117] {standard_task_runner.py:52} INFO - Started process 697 to run task
+[2023-03-16 17:54:47,136] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'local_ingestion_v1.0', 'ingest_data', 'manual__2023-03-16T17:54:33.369195+00:00', '--job-id', '81', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_local.py', '--cfg-path', '/tmp/tmp6zcm7llj', '--error-file', '/tmp/tmpdoedz7dj']
+[2023-03-16 17:54:47,140] {standard_task_runner.py:77} INFO - Job 81: Subtask ingest_data
+[2023-03-16 17:54:47,334] {logging_mixin.py:109} INFO - Running <TaskInstance: local_ingestion_v1.0.ingest_data manual__2023-03-16T17:54:33.369195+00:00 [running]> on host c6eb90394236
+[2023-03-16 17:54:47,562] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=local_ingestion_v1.0
+AIRFLOW_CTX_TASK_ID=ingest_data
+AIRFLOW_CTX_EXECUTION_DATE=2023-03-16T17:54:33.369195+00:00
+AIRFLOW_CTX_DAG_RUN_ID=manual__2023-03-16T17:54:33.369195+00:00
+[2023-03-16 17:54:48,391] {logging_mixin.py:109} INFO -    fixed acidity  volatile acidity  citric acid  ...  sulphates  alcohol  quality
+0            7.4              0.70         0.00  ...       0.56      9.4        5
+1            7.8              0.88         0.00  ...       0.68      9.8        5
+2            7.8              0.76         0.04  ...       0.65      9.8        5
+3           11.2              0.28         0.56  ...       0.58      9.8        6
+4            7.4              0.70         0.00  ...       0.56      9.4        5
+5            7.4              0.66         0.00  ...       0.56      9.4        5
+6            7.9              0.60         0.06  ...       0.46      9.4        5
+7            7.3              0.65         0.00  ...       0.47     10.0        7
+8            7.8              0.58         0.02  ...       0.57      9.5        7
+9            7.5              0.50         0.36  ...       0.80     10.5        5
+
+[10 rows x 12 columns]
+[2023-03-16 17:54:48,396] {python.py:175} INFO - Done. Returned value was: None
+[2023-03-16 17:54:48,441] {taskinstance.py:1277} INFO - Marking task as SUCCESS. dag_id=local_ingestion_v1.0, task_id=ingest_data, execution_date=20230316T175433, start_date=20230316T175446, end_date=20230316T175448
+[2023-03-16 17:54:48,556] {local_task_job.py:154} INFO - Task exited with return code 0
+[2023-03-16 17:54:48,684] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check

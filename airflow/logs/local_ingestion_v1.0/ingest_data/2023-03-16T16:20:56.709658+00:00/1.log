@@ -1,0 +1,69 @@
+[2023-03-16 16:21:08,848] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: local_ingestion_v1.0.ingest_data manual__2023-03-16T16:20:56.709658+00:00 [queued]>
+[2023-03-16 16:21:08,887] {taskinstance.py:1032} INFO - Dependencies all met for <TaskInstance: local_ingestion_v1.0.ingest_data manual__2023-03-16T16:20:56.709658+00:00 [queued]>
+[2023-03-16 16:21:08,889] {taskinstance.py:1238} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-16 16:21:08,892] {taskinstance.py:1239} INFO - Starting attempt 1 of 2
+[2023-03-16 16:21:08,894] {taskinstance.py:1240} INFO - 
+--------------------------------------------------------------------------------
+[2023-03-16 16:21:08,932] {taskinstance.py:1259} INFO - Executing <Task(PythonOperator): ingest_data> on 2023-03-16 16:20:56.709658+00:00
+[2023-03-16 16:21:08,944] {standard_task_runner.py:52} INFO - Started process 3402 to run task
+[2023-03-16 16:21:08,953] {standard_task_runner.py:76} INFO - Running: ['***', 'tasks', 'run', 'local_ingestion_v1.0', 'ingest_data', 'manual__2023-03-16T16:20:56.709658+00:00', '--job-id', '56', '--raw', '--subdir', 'DAGS_FOLDER/data_ingestion_local.py', '--cfg-path', '/tmp/tmpzcidacvq', '--error-file', '/tmp/tmpj90raau4']
+[2023-03-16 16:21:08,959] {standard_task_runner.py:77} INFO - Job 56: Subtask ingest_data
+[2023-03-16 16:21:09,126] {logging_mixin.py:109} INFO - Running <TaskInstance: local_ingestion_v1.0.ingest_data manual__2023-03-16T16:20:56.709658+00:00 [running]> on host c6eb90394236
+[2023-03-16 16:21:09,334] {taskinstance.py:1426} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=local_ingestion_v1.0
+AIRFLOW_CTX_TASK_ID=ingest_data
+AIRFLOW_CTX_EXECUTION_DATE=2023-03-16T16:20:56.709658+00:00
+AIRFLOW_CTX_DAG_RUN_ID=manual__2023-03-16T16:20:56.709658+00:00
+[2023-03-16 16:21:09,350] {taskinstance.py:1700} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 174, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 185, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/ingest_data.py", line 14, in ingest_callable
+    chunksize=100000, separator=';')
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/util/_decorators.py", line 311, in wrapper
+    return func(*args, **kwargs)
+TypeError: read_csv() got an unexpected keyword argument 'separator'
+[2023-03-16 16:21:09,396] {taskinstance.py:1277} INFO - Marking task as UP_FOR_RETRY. dag_id=local_ingestion_v1.0, task_id=ingest_data, execution_date=20230316T162056, start_date=20230316T162108, end_date=20230316T162109
+[2023-03-16 16:21:09,445] {standard_task_runner.py:92} ERROR - Failed to execute job 56 for task ingest_data
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/task/task_runner/standard_task_runner.py", line 85, in _start_by_fork
+    args.func(args, dag=self.dag)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/cli/cli_parser.py", line 48, in command
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/utils/cli.py", line 92, in wrapper
+    return f(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/cli/commands/task_command.py", line 298, in task_run
+    _run_task_by_selected_method(args, dag, ti)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/cli/commands/task_command.py", line 107, in _run_task_by_selected_method
+    _run_raw_task(args, ti)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/cli/commands/task_command.py", line 184, in _run_raw_task
+    error_file=args.error_file,
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/utils/session.py", line 70, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1329, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1455, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/taskinstance.py", line 1511, in _execute_task
+    result = execute_callable(context=context)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 174, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 185, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/ingest_data.py", line 14, in ingest_callable
+    chunksize=100000, separator=';')
+  File "/home/airflow/.local/lib/python3.7/site-packages/pandas/util/_decorators.py", line 311, in wrapper
+    return func(*args, **kwargs)
+TypeError: read_csv() got an unexpected keyword argument 'separator'
+[2023-03-16 16:21:09,499] {local_task_job.py:154} INFO - Task exited with return code 1
+[2023-03-16 16:21:09,614] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
