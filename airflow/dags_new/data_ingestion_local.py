@@ -3,6 +3,7 @@ import pandas as pd
 from ingest_data import ingest_callable
 from airflow.operators.bash_operator import BashOperator
 from airflow.operators.python import PythonOperator
+from airflow.operators.postgres_operator import PostgresOperator
 from airflow.utils.dates import days_ago
 
 from airflow import DAG
@@ -48,4 +49,36 @@ with DAG(
                        csv_name=f'{path_to_local_home}/{dataset_file}')
     )
 
-    download_dataset_task >> ingest_task
+    # Another way of connecting to postgres using the operator
+    # For this we created a connection in Airflow UI first
+    # The three tasks next, create a log containing runs
+    create_logs_task = PostgresOperator(
+        task_id='create_log_task_table',
+        postgres_conn_id='postgress_localhost',
+        sql="""
+            create table if not exists dag_runs (
+                dt date,
+                dag_id character varying,
+                primary key (dt, dag_id)
+            )
+        """
+    )
+
+    # postgres will raise error if we insert twice the same primary key. This is way we delete first, then we insert
+    delete_logs_task = PostgresOperator(
+        task_id='delete_logs_task',
+        postgres_conn_id='postgress_localhost',
+        sql="""
+            delete from dag_runs where dt = '{{ ds }}' and dag_id =  '{{ dag.dag_id }}';
+        """
+    )
+
+    insert_logs_task = PostgresOperator(
+        task_id='insert_logs_task',
+        postgres_conn_id='postgress_localhost',
+        sql="""
+            insert into dag_runs (dt, dag_id) values ('{{ ds }}', '{{ dag.dag_id }}')
+        """
+    )
+
+    download_dataset_task >> ingest_task >> create_logs_task >> delete_logs_task >> insert_logs_task
